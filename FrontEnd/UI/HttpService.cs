@@ -75,7 +75,7 @@ public class HttpService
 
         try
         {
-            value = await JsonSerializer.DeserializeAsync<int>(await client.GetStreamAsync($"Product/"));
+            value = await JsonSerializer.DeserializeAsync<int>(await client.GetStreamAsync($"Product/{item}/{VillageID}"));
             return value;
         }
         catch (HttpRequestException ex)

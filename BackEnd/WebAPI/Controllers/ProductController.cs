@@ -18,7 +18,7 @@ namespace WebAPI.Controllers
         }
 
         // GET: api/<ProductController>
-        [HttpGet]
+        [HttpGet("{item}/{VillageID}")]
         public async Task<int> GetProduct(int item, int VillageID)
         {
             return await _bl.GetProduct(item, VillageID);

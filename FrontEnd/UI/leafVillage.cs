@@ -40,10 +40,10 @@ public class leafVillage: StoreFronts
                 Console.WriteLine("Enter the product Id you'd like to purchase");
                 string? i = Console.ReadLine();
                 int item = Convert.ToInt32(i);
-                
-                
+                Console.WriteLine(VillageID);
+                Console.WriteLine(item);
                 int number = await _httpService.GetProductAsync(item,VillageID);
-
+                Console.WriteLine(number);
                 Console.WriteLine("How many would you like to buy?: ");
                 string? b = Console.ReadLine();
                 int buy = Convert.ToInt32(b);

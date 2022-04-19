@@ -104,14 +104,21 @@ public class DBRepository
     }
     public async Task<int> GetProduct(int item, int VillageID)
     {
+            int quantity=-1;
+
             SqlConnection connection = new SqlConnection(_connectionString);
             connection.Open();
             SqlCommand cmd = new SqlCommand("SELECT Quantity_INV FROM Inventory INNER JOIN Product ON Inventory.ProductID = Product.ProductID WHERE Inventory.ProductID = @item and VillageID = @VillageID;", connection);
 
             cmd.Parameters.AddWithValue("@item", item);
             cmd.Parameters.AddWithValue("@VillageID", VillageID);
-            int quantity = (int) await cmd.ExecuteScalarAsync();
 
+            using SqlDataReader reader = await cmd.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+            { 
+                quantity = reader.GetInt32(0); 
+            }
+            reader.Close();
             connection.Close();
             return quantity;
     }
